@@ -10,7 +10,7 @@ from .memory import Memory
 
 
 class MACore(nn.Module):
-    """ Memory-augmented HFG """
+    """ Memory-augmented HFG (High-Frequency Generator) """
     def __init__(self, C_in, C, C_out, comp_enc, dec, n_comps, n_comp_types, language):
         """
         Args:

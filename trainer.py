@@ -83,10 +83,15 @@ class Trainer:
         return loss_dic
 
     def accum_g(self, decay=0.999):
+        """ apply the exponential moving average to the generator
+        """
+
         par1 = dict(self.gen_ema.named_parameters())
         par2 = dict(self.gen.named_parameters())
 
         for k in par1.keys():
+            # EMA_GAN Eq. (2)
+            # par1[k].data = decay * par1[k].data + (1 - decay) * par2[k].data
             par1[k].data.mul_(decay).add_(1 - decay, par2[k].data)
 
     def sync_g_ema(self, style_ids, style_comp_ids, style_imgs, trg_ids, trg_comp_ids):
@@ -200,6 +205,8 @@ class Trainer:
             losses.updates(loss_dic, B)
 
             # generator EMA
+            # averaging parameters outside of the GAN training loop (by EMA_GAN)
+            # see https://github.com/yasinyazici/EMA_GAN/blob/fd296d600d9404a99feaece8611ca6ad4eb4ee46/updater.py#L95
             self.accum_g()
             if self.is_bn_gen:
                 self.sync_g_ema(style_ids, style_comp_ids, style_imgs, trg_ids, trg_comp_ids)
