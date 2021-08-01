@@ -95,7 +95,10 @@ class Trainer:
             par1[k].data.mul_(decay).add_(1 - decay, par2[k].data)
 
     def sync_g_ema(self, style_ids, style_comp_ids, style_imgs, trg_ids, trg_comp_ids):
-        """ update running stats for BN & update max singular value for SN """
+        """ update running stats for BN & update max singular value for SN
+
+        c.f. https://github.com/yasinyazici/EMA_GAN/blob/fd296d600d9404a99feaece8611ca6ad4eb4ee46/common/misc.py#L49
+        """
         org_train_mode = self.gen_ema.training
         with torch.no_grad():
             self.gen_ema.train()
