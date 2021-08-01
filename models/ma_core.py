@@ -10,7 +10,10 @@ from .memory import Memory
 
 
 class MACore(nn.Module):
-    """ Memory-augmented HFG (High-Frequency Generator) """
+    """ Memory-augmented HFG (High-Frequency Generator)
+
+    e.g. https://www.researchgate.net/figure/High-Frequency-Generator-HFG-Architecture-HFG-is-a-conditional-GAN-that-includes-skip_fig2_320014363
+    """
     def __init__(self, C_in, C, C_out, comp_enc, dec, n_comps, n_comp_types, language):
         """
         Args:
