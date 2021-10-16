@@ -232,7 +232,7 @@ def main(language, fonts_dir, meta_path, dump_dir):
     meta = json.load(open(meta_path))
     allfonts = set(meta['train']['fonts'] + meta['valid']['fonts'])
     fonts = [
-        str(fname) for fname in fonts_dir.rglob("*.ttf") if fname.name in allfonts
+        str(fname) for fname in fonts_dir.rglob("*.*tf") if fname.name in allfonts
     ]
     assert len(allfonts) == len(fonts)
 
