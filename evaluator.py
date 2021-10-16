@@ -338,6 +338,7 @@ class Evaluator:
 
     def merge_and_log_image(self, name, out, target, step):
         """ Merge out and target into 2-column grid and log it """
+        # left: generated images, right: GT
         merge = utils.make_merged_grid([out, target], merge_dim=2)
         self.writer.add_image(name, merge, global_step=step)
 
